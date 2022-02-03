@@ -4,8 +4,10 @@ import CardForm from '../CardForm/CardForm';
 import { useSelector } from 'react-redux';
 
 const Column = props => {
+  
+  const filter = useSelector(state => state.filter.toLowerCase());
+  const cards = useSelector(state => state.cards).filter(card => ((card.columnId === props.id) && (card.title.toLowerCase().search(filter) !== -1)));
 
-  const cards = useSelector(state => state.cards).filter(card => card.columnId === props.id);
   return (
     <article className={styles.column}>
       <h2 className={styles.title}><span className={styles.icon + ' fa fa-' + props.icon}></span>{props.title}</h2>
