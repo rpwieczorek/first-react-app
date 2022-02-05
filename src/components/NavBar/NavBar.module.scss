@@ -27,6 +27,9 @@
       color: $color-light;
       padding: 10px;
       text-decoration: none;
+    }
+    .linkActive {
+      color: $color-warning;
     }  
   }
 }
