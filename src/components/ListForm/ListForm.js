@@ -1,6 +1,6 @@
 import styles from './ListForm.module.scss';
 import { useDispatch } from 'react-redux';
-//import addList from '../../redux/store'; // not working properly
+import { addList } from '../../redux/store'; 
 import { useState } from 'react';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
@@ -12,8 +12,7 @@ const ListForm = () => {
   
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch({ type: 'ADD_LIST', payload: {title,description} });
-    //dispatch(addList({title, description})); // not working, no idea why
+    dispatch(addList({title, description})); 
     setTitle('');
     setDescription('');
 }
