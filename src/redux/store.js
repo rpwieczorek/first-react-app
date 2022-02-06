@@ -1,45 +1,19 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import initialState from './initialState';
-import shortid from 'shortid';
-import { strContains } from '../utils/strContains';
+import listsReducer from './listsRedux';
+import columnsReducer from './columnsRedux';
+import cardsReducer from './cardsRedux';
+import searchStringReducer from './searchStringRedux';
 
-//selectors
-export const getFilteredCards = ({cards, searchString}, columnId) => cards
-  .filter(card => card.columnId === columnId && strContains(card.title,searchString));
+const subreducers = {
+  lists: listsReducer,
+  columns: columnsReducer,
+  cards: cardsReducer,
+  searchString: searchStringReducer
+}
 
-export const getAllColumns = (state => state.columns);
+const reducer = combineReducers(subreducers);
 
-export const getAllLists = (state => state.lists);
-
-export const getListById = ({ lists }, listId) => lists.find(list => list.id === listId);
-
-export const getColumnsByList = ({columns}, listId) => columns.filter(column => column.listId === listId);
-
-export const getSearchPhrase = state => state.searchString;
-
-// action creators
-export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
-
-export const addCard = payload => ({ type: 'ADD_CARD', payload });
-
-export const addList = payload => ({ type: 'ADD_LIST', payload });
-
-export const search = payload => ({ type: 'SEARCH', payload });
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_LIST':
-      return { ...state, lists: [...state.lists, { ...action.payload, id: shortid()}]};
-    case 'ADD_COLUMN':
-      return { ...state, columns: [...state.columns, { ...action.payload, id: shortid()}]};
-    case 'ADD_CARD':
-      return { ...state, cards: [...state.cards, { ...action.payload, id: shortid()}]};
-    case 'SEARCH':
-      return { ...state, searchString: action.payload};  
-    default:
-      return state;
-  };
-};
 
 const store = createStore(
   reducer,

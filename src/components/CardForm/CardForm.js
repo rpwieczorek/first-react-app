@@ -3,7 +3,7 @@ import TextInput from '../TextInput/TextInput';
 import { useState } from 'react/cjs/react.development';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
-import { addCard } from '../../redux/store';
+import { addCard } from '../../redux/cardsRedux';
 
 const CardForm = props => {
   const [title,setTitle] = useState('');
@@ -11,7 +11,7 @@ const CardForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addCard({ columnId: props.columnId, title: title }));
+    dispatch(addCard({ columnId: props.columnId, title: title , isFavorite: false}));
     setTitle('');
 }
   return(
