@@ -1,10 +1,7 @@
-import {getCardById,checkIsFavorite } from '../../redux/store';
+import {checkIsFavorite, toggleCardFavorite } from '../../redux/cardsRedux';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import styles from './ButtonFavorite.module.scss';
-import { useDispatch } from 'react-redux';
-import { toggleCardFavorite } from '../../redux/store';
-
 
 const ButtonFavorite = props => {
   const isFavorite = useSelector(state => checkIsFavorite(state, props.id));
