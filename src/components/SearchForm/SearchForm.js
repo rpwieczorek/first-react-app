@@ -3,12 +3,17 @@ import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
-import { search } from '../../redux/store';
+import { search, getSearchPhrase } from '../../redux/searchStringRedux';
+import { useSelector } from 'react-redux';
+
 
 
 const SearchForm = () => {
   const [searchPhrase,setSearchPhrase] = useState('');
   const dispatch = useDispatch();
+
+  const storedSearchPhrase = useSelector(state => getSearchPhrase(state));
+  // console.log(storedSearchPhrase);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,7 +23,7 @@ const SearchForm = () => {
   
   return (
       <form className={styles.searchForm} onSubmit={handleSubmit}>
-          <TextInput placeholder="Search..."  type="text" value={searchPhrase} onChange={e => setSearchPhrase(e.target.value)}/>
+          <TextInput placeholder={storedSearchPhrase !== '' ? storedSearchPhrase : ''}  type="text" value={searchPhrase} onChange={e => setSearchPhrase(e.target.value)}/>
           <Button>
             <span className="fa fa-search" />
           </Button>
