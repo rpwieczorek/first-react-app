@@ -3,9 +3,9 @@ import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
-import { search } from '../../redux/store';
+import { search, getSearchPhrase } from '../../redux/searchStringRedux';
 import { useSelector } from 'react-redux';
-import { getSearchPhrase } from '../../redux/store';
+
 
 
 const SearchForm = () => {
@@ -13,7 +13,7 @@ const SearchForm = () => {
   const dispatch = useDispatch();
 
   const storedSearchPhrase = useSelector(state => getSearchPhrase(state));
-  //console.log(storedSearchPhrase);
+  // console.log(storedSearchPhrase);
 
   const handleSubmit = e => {
     e.preventDefault();
