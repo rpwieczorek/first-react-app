@@ -1,11 +1,15 @@
 import ButtonFavorite from '../ButtonFavorite/ButtonFavorite';
+import ButtonRemove from '../ButtonRemove/ButtonRemove';
 import styles from './Card.module.scss';
 
 const Card = props => {
   return (
     <li className={styles.card}>
       {props.title}
-      <ButtonFavorite id={props.id}/>
+      <ul>
+        <li><ButtonFavorite id={props.id}/></li>
+        <li><ButtonRemove id={props.id}/></li>
+      </ul>
     </li>
   );
 };
